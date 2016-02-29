@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Interactone View Index</title>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="\Interactone\Sample\Block\Template" name="interactone_template" template="Interactone_Sample::template.phtml" />
+        </referenceContainer>
+    </body>
+
+</page>

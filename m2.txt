@@ -1,0 +1,279 @@
+========================================
+>>>>>>>>>>>>>>MAGENTO 2<<<<<<<<<<<<<<<<<
+========================================
+	Installation
+	-------------
+		git clone https://github.com/ryanstreet/magento2-vagrant.git m2/
+			(includes some extra stuff for development mode)
+		git submodule init
+		git submodule update
+
+		vagrant up
+		composer install
+			(packagist)
+
+		gui install
+
+		php bin/magento
+			CLI tool like magerun
+
+			setup:static-content:deploy
+				run for the first time to initialize the admin panel. No static content in developer mode
+
+
+	Working With M2
+	----------------
+		core -> lib/Magento/Framework
+
+		Creating a module
+		------------------
+		registration.php
+			can copy from elsewhere, just need to make sure the module name is correct
+
+		etc/module.xml
+
+		php bin/magento module:enable Interactone_Sample
+		php bin/magento setup:upgrade
+			(runs upgrade scripts for schema & data in any modules that need it)
+
+		DO NOT RE-RUN COMPILE COMMAND (unless necessary for the resources within)
+
+		event observers
+			events.xml
+				frontend / admin
+			execute method rather than module declaration (like controllers)
+
+		plugins
+			override core methods
+			before, after, "around"
+				around 
+					gives you the method to call so you can do stuff before & after without having to use 2 plugins
+					multiple people can alter the same method without conflicts
+
+					\Closure $proceed
+						2nd parameter
+						ran as $proceed() (with $ and ())
+
+		preference
+			fundamentally override functionality of a class
+			not just overriding one method -- rewriting
+			giving control to something else
+
+		service contract
+			no matter what, the methods will always be the same in m2
+			ensures stability
+			if you're altering something w/ a service contract, you must uphold that service contract
+			all web api methods will always work because of this
+			all service contracts are interfaces, not all interfaces are service contracts
+
+		create a new controller
+			create a route
+				routes.xml
+				creates front name
+					first part of the URL
+			create a class
+
+			URL structure
+				frontName/Folder/Controller
+
+			namespace 	= path to the controller file
+			class 		= controller file name
+			extends 	= framework class it should extend
+
+			can use 'use' then action path.. extends the file name
+				if there are conflicts, can 'use path as alias' then extends alias
+
+		create plugin
+			di.xmls
+				type name 	= class you want to intercept
+				plugin name = unique name
+				type 		= new class
+
+				this can be in:
+					etc = global
+					etc/frontend = frontend
+					etc/adminhtml = admin
+
+			model/plugin/hello.php
+				namespace
+				class
+
+			*plugins are always models
+
+		create preference
+			add preference to di.xml
+				for 	= core class
+				type 	= new class
+			create new class
+				add core class to constructor
+
+		arguments
+			array
+			string
+			object
+			constants
+			boolean
+			number
+			null
+
+			virtual type
+				equivalent of class alias
+				allows to substitute one class for another
+				if you need a unique class, but not necessarily unique functionality
+				name = virtual class
+				type = base class
+
+		Injectables
+			what if the class you're injecting relies on external dependencies
+				ex: need the product model, how do you get it? what if somethin else is loading? how do I inject a 'non-injectable'? catalog model requires the db
+
+					repositories & factories
+					repository
+						allows you to get non-injectable objects
+						if you need a product, you can inject the product repository to get the actual model that you need
+
+						when it's called inside a constructor, the repo itself is not being requested
+
+					factory
+						generates non-injectable objects
+						append Factory to any class, Magento will generate that factory automgically (var/generation)
+							Get the original non-injectable instance by calling create()
+
+			what if you need a class injected and you only need it for part of what it needs?
+				proxy
+					will defer the creation of an object until you need it rather than calling some super heavy class that does a lot or has a bunch of dependencies
+
+					can be created the same as a factory or you can declare in di.xml
+
+			auto-generated classes need to be deleted when you edit the base class
+
+		customizing m2
+			1. observer
+			2. plugin
+			3. preference
+
+
+		ORM
+			pretty much the same in m2 as it was in m1
+				_construct & init
+			model, resource model, collection
+			magic methods are available if it extends the abstract data class
+
+		Installation and upgrade scripts
+			Setup/InstallSchema.php
+			Setup/InstallData.php
+
+			install and upgrade scripts aren't done the same way in m2:
+				1 file for installing data, 1 to install schema
+				1 file to update data, 1 to update schema
+
+		Views
+			template, blocks, layout xml
+			difference
+				fallback system
+					everything within design folders falls back
+					in m2 you can configure how fallbacks work
+						define your own inheritance system
+						falls back through parent themes to the module 
+
+			frontend, admin and base (both front & admin)
+
+			registration.php
+				registers theme
+
+			theme.xml
+				set parent, title, and preview image
+
+			editing templates when writing a module should be done within the module..
+				let the front end devs deal with themes for customizing it
+
+			layout files are merged and parsed just like m1
+				one layout file per handle
+				within layouts directory, will use default before the layout handle files
+
+			Themes
+				create new theme:
+					registration.php
+					theme.xml
+						(image isn't required, but it _is_ if you include the preview node)
+
+				themes are area-specific: admin or frontend
+
+			Block classes
+				lib/internal/Magento/framework/view/
+				use $block in templates, not $this
+					$this class = Magento\Framework\View\TemplateEngine\Php, where block is the actual block
+				lifecycle
+					_prepareLayout()
+						models are set
+					toHtml()
+						still has _beforeHtml, _toHtml, and _afterHtml
+						if there's a template, it'll call fetchView
+							validator,
+							template engine pool, (can be switched out, but you'll use this 99% of the time)
+							render template context (template file)
+				View models
+					business logic that applies to view layer
+				Create
+
+					$block->insert (to add child block to the top)
+					$block->append (to add child block to the end)
+
+					$block->assign('variable', 'value')
+
+
+			Container
+				m1 text list
+
+				references like m1
+					referenceBlock (same as m1)
+					referenceContainer
+					block node
+					'move' node (from / to) *new in m2
+
+				action methods are back in m2
+
+				update = take that layout and put it in this layout (just like m1)
+
+			View/Layout/etc/ as the .xsd files that tell you what you can use in layout files
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
