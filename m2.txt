@@ -33,8 +33,6 @@
 			    only invalidated caches
 
 
-
-
 	Working With M2
 	----------------
 		core -> lib/Magento/Framework
@@ -256,66 +254,37 @@
 			View/Layout/etc/ as the .xsd files that tell you what you can use in layout files
 
 
-		tests, controllers and setup files must be in folders with those
+		tests, controllers and setup files must be in folders with appropriate designations
 
 		$this->logger->debug
 		    creates log in debug.log
 
-		 module:disable to disable module (best way)
+		module:disable to disable module (best way)
+
+		composer.json is required to distribute via Magento connect
 
 
 
-PHPStorm
+    PHPStorm tips & tricks
+    -----------------------
+        app/code
+            Right Click > Mark Directory As > Sources Route
+                helpful for auto-completion & validation of classes / methods
 
-    app/code (mark as sources route)
+        Tools > Save file as template
+            Set name to what you want it to be in the 'new' dropdown (Right Click > New) adjust template code to include ${VAR_NAME} as needed
+            This allows you to autogenerate common files (registration, module xml, etc)
 
-    Tools > Save file as template
-        set name to what you want it to be in the 'new' dropdown
+        Set PHPStorm as the IDE
+            php bin/magento dev:urn-catalog:generate --ide="phpstorm" ~/path/to/.idea/misc.xml
+            // makes things easier. Autocomplete, etc
 
-    php bin/magento dev:urn-catalog:generate --ide="phpstorm" ../.idea/misc.xml
-        // makes things easier. Autocomplete, etc
+        Import PHP Class
+            click within variable
+            'alt + enter' > import class
+    
+        Get to the 'green checkmark' with M2
+            Checks methods, dependencies, syntax, etc
 
-    New PHP Class
-        add use class via 'alt + enter' import class
-
-    Get to the 'green checkmark' with M2
-
-    dependency injection
-        add class to __construct, set variable, click in variable, 'alt + tab' Initialize
-
-
-
-    composer.json is required to distribute via Magento connect
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        dependency injection
+            add class to __construct, set variable, click in variable, 'alt + tab' > Initialize
