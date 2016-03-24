@@ -20,6 +20,20 @@
 			setup:static-content:deploy
 				run for the first time to initialize the admin panel. No static content in developer mode
 
+			deploy:mode:set developer
+			    required for development, or else you'll have a bad time
+
+			cache:enable
+			    recommended for development, or else you'll have a slow time
+
+			cache:flush
+			    clears all
+
+			cache:clean
+			    only invalidated caches
+
+
+
 
 	Working With M2
 	----------------
@@ -42,6 +56,10 @@
 			events.xml
 				frontend / admin
 			execute method rather than module declaration (like controllers)
+
+			event
+			    shared = true by default (singleton)
+			        false if you want it to be a model
 
 		plugins
 			override core methods
@@ -98,7 +116,7 @@
 				namespace
 				class
 
-			*plugins are always models
+			*plugins are NOT always models
 
 		create preference
 			add preference to di.xml
@@ -125,7 +143,7 @@
 
 		Injectables
 			what if the class you're injecting relies on external dependencies
-				ex: need the product model, how do you get it? what if somethin else is loading? how do I inject a 'non-injectable'? catalog model requires the db
+				ex: need the product model, how do you get it? what if something else is loading? how do I inject a 'non-injectable'? catalog model requires the db
 
 					repositories & factories
 					repository
@@ -238,12 +256,36 @@
 			View/Layout/etc/ as the .xsd files that tell you what you can use in layout files
 
 
+		tests, controllers and setup files must be in folders with those
+
+		$this->logger->debug
+		    creates log in debug.log
+
+		 module:disable to disable module (best way)
 
 
 
+PHPStorm
+
+    app/code (mark as sources route)
+
+    Tools > Save file as template
+        set name to what you want it to be in the 'new' dropdown
+
+    php bin/magento dev:urn-catalog:generate --ide="phpstorm" ../.idea/misc.xml
+        // makes things easier. Autocomplete, etc
+
+    New PHP Class
+        add use class via 'alt + enter' import class
+
+    Get to the 'green checkmark' with M2
+
+    dependency injection
+        add class to __construct, set variable, click in variable, 'alt + tab' Initialize
 
 
 
+    composer.json is required to distribute via Magento connect
 
 
 

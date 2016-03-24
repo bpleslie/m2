@@ -1,14 +1,1 @@
-/**
- * Copyright © 2015 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
-/*jshint browser:true jquery:true*/
-define([
-    'jquery',
-    'domReady!'
-], function ($) {
-    'use strict';
-
-    /* Form with auto submit feature */
-    $('form[data-auto-submit="true"]').submit();
-});
+/var/www/m2/magento2/lib/web/mage/common.js

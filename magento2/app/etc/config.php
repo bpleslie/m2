@@ -2,8 +2,8 @@
 return array (
   'modules' => 
   array (
-    'Interactone_Sample' => 1,
-    'Interactone_Training' => 1,
+    'Interactone_Sample' => 0,
+    'Interactone_Training' => 0,
     'Magento_Store' => 1,
     'Magento_AdvancedPricingImportExport' => 1,
     'Magento_Directory' => 1,
@@ -104,5 +104,6 @@ return array (
     'Magento_Weee' => 1,
     'Magento_CatalogWidget' => 1,
     'Magento_Wishlist' => 1,
+    'Training_FreeGeoIp' => 1,
   ),
 );

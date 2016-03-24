@@ -6,11 +6,11 @@ return array (
   ),
   'install' => 
   array (
-    'date' => 'Fri, 15 Jan 2016 20:18:45 +0000',
+    'date' => 'Wed, 23 Mar 2016 18:27:38 +0000',
   ),
   'crypt' => 
   array (
-    'key' => 'c4f9a809311c07712e21a0da33946c2f',
+    'key' => '7d0f53eb04d07b4b86542f4109dd8820',
   ),
   'session' => 
   array (
@@ -24,7 +24,7 @@ return array (
       'default' => 
       array (
         'host' => 'localhost',
-        'dbname' => 'magento',
+        'dbname' => 'm2',
         'username' => 'root',
         'password' => '',
         'active' => '1',
@@ -42,17 +42,17 @@ return array (
   'MAGE_MODE' => 'developer',
   'cache_types' => 
   array (
-    'config' => 0,
-    'layout' => 0,
-    'block_html' => 0,
-    'collections' => 0,
-    'reflection' => 0,
-    'db_ddl' => 0,
-    'eav' => 0,
-    'config_integration' => 0,
-    'config_integration_api' => 0,
-    'full_page' => 0,
-    'translate' => 0,
-    'config_webservice' => 0,
+    'config' => 1,
+    'layout' => 1,
+    'block_html' => 1,
+    'collections' => 1,
+    'reflection' => 1,
+    'db_ddl' => 1,
+    'eav' => 1,
+    'config_integration' => 1,
+    'config_integration_api' => 1,
+    'full_page' => 1,
+    'translate' => 1,
+    'config_webservice' => 1,
   ),
 );
