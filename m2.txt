@@ -267,8 +267,10 @@
 
     PHPStorm tips & tricks
     -----------------------
+        'alt + enter' = magic
+
         app/code
-            Right Click > Mark Directory As > Sources Route
+            Right Click > Mark Directory As > Resource Route
                 helpful for auto-completion & validation of classes / methods
 
         Tools > Save file as template
@@ -277,14 +279,22 @@
 
         Set PHPStorm as the IDE
             php bin/magento dev:urn-catalog:generate --ide="phpstorm" ~/path/to/.idea/misc.xml
-            // makes things easier. Autocomplete, etc
+            (makes things easier. Autocomplete, etc)
 
         Import PHP Class
             click within variable
             'alt + enter' > import class
-    
+
         Get to the 'green checkmark' with M2
             Checks methods, dependencies, syntax, etc
 
-        dependency injection
-            add class to __construct, set variable, click in variable, 'alt + tab' > Initialize
+        Dependency Injection made easy
+            add class and variable to __construct parameter
+                auto renames the class and adds to 'use'
+            click in variable, 'alt + enter' > Initialize Fields, select field & hit 'enter'
+                auto generates variable to be used within the current class
+
+        Method Extraction
+            Within a function, highlight a section of code where a variable is created and assigned.
+            'ctrl + alt + m' to extract the code and automagically convert it into its own method.
+                (can choose the settings for the new method within the popup)
