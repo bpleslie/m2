@@ -104,6 +104,7 @@ return array (
     'Magento_Weee' => 1,
     'Magento_CatalogWidget' => 1,
     'Magento_Wishlist' => 1,
-    'Training_FreeGeoIp' => 1,
+    'Training_FreeGeoIp' => 0,
+    'Training_OrderAction' => 1,
   ),
 );
